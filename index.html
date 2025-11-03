@@ -412,6 +412,117 @@
             font-size: 30px;
         }
 
+        /* Results Gallery Section - NOVA SEÇÃO */
+        .results {
+            background-color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .results-gallery {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            margin: 40px auto;
+        }
+
+        .gallery-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 20px;
+            padding: 20px 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--vermelho-paixao) #f1f1f1;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .gallery-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .gallery-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .gallery-container::-webkit-scrollbar-thumb {
+            background: var(--vermelho-paixao);
+            border-radius: 10px;
+        }
+
+        .gallery-container::-webkit-scrollbar-thumb:hover {
+            background: #c0392b;
+        }
+
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 300px;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 20px 15px 15px;
+            text-align: left;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+
+        .gallery-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .gallery-nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--vermelho-paixao);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .gallery-nav-btn:hover {
+            background-color: #c0392b;
+            transform: scale(1.1);
+        }
+
         /* Values Section */
         .values {
             background-color: white;
@@ -894,6 +1005,11 @@
             .services-grid {
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
+            
+            .gallery-item {
+                width: 250px;
+                height: 350px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -957,6 +1073,11 @@
             .services-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .gallery-item {
+                width: 220px;
+                height: 320px;
+            }
         }
     </style>
 </head>
@@ -974,6 +1095,7 @@
                         <li><a href="#home">Início</a></li>
                         <li><a href="#about">Sobre</a></li>
                         <li><a href="#services">Serviços</a></li>
+                        <li><a href="#results">Resultados</a></li>
                         <li><a href="#values">Valores</a></li>
                         <li><a href="#contact">Contacto</a></li>
                     </ul>
@@ -994,6 +1116,7 @@
                 <li><a href="#home" class="drawer-link">Início</a></li>
                 <li><a href="#about" class="drawer-link">Sobre</a></li>
                 <li><a href="#services" class="drawer-link">Serviços</a></li>
+                <li><a href="#results" class="drawer-link">Resultados</a></li>
                 <li><a href="#values" class="drawer-link">Valores</a></li>
                 <li><a href="#contact" class="drawer-link">Contacto</a></li>
             </ul>
@@ -1111,6 +1234,70 @@
                     </div>
                     <h3>Pesquisa Científica</h3>
                     <p>Apoio em metodologia e pesquisa científica</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Gallery Section - NOVA SEÇÃO -->
+    <section class="results" id="results">
+        <div class="container">
+            <h2 class="section-title">Resultados Satisfatórios</h2>
+            <p>Conheça alguns dos nossos clientes que alcançaram o sucesso académico com a ajuda da Lis Consult</p>
+            
+            <div class="results-gallery">
+                <div class="gallery-container" id="gallery-container">
+                    <div class="gallery-item">
+                        <img src="https://i.postimg.cc/x8RjJSdy/1762178441102.jpg" alt="Resultado 1 - Cliente satisfeito">
+                        <div class="gallery-caption">
+                            <h4>Monografia Concluída</h4>
+                            <p>Estudante de Direito - Universidade Eduardo Mondlane</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.postimg.cc/j5ySTf0L/1762178438800.jpg" alt="Resultado 2 - Cliente satisfeito">
+                        <div class="gallery-caption">
+                            <h4>Relatório de Estágio</h4>
+                            <p>Estudante de Engenharia - Instituto Superior de Transportes</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.postimg.cc/HkLnMjXm/1762178436245.jpg" alt="Resultado 3 - Cliente satisfeito">
+                        <div class="gallery-caption">
+                            <h4>Dissertação de Mestrado</h4>
+                            <p>Mestrando em Gestão - Universidade Pedagógica</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.postimg.cc/JnpdG6L1/1762178443615.jpg" alt="Resultado 4 - Cliente satisfeito">
+                        <div class="gallery-caption">
+                            <h4>Plano de Negócios</h4>
+                            <p>Empreendedor - Curso de Gestão de Empresas</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.postimg.cc/hvHsdN3j/1762178446612.jpg" alt="Resultado 5 - Cliente satisfeito">
+                        <div class="gallery-caption">
+                            <h4>Exame de Estado</h4>
+                            <p>Estudante de Medicina - Faculdade de Medicina</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://i.postimg.cc/Pq3RqVHF/1762178471485.jpg" alt="Resultado 6 - Cliente satisfeito">
+                        <div class="gallery-caption">
+                            <h4>Pesquisa Científica</h4>
+                            <p>Investigador - Centro de Estudos Africanos</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-nav">
+                    <button class="gallery-nav-btn" id="prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="gallery-nav-btn" id="next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -1509,6 +1696,26 @@
             }, 1500);
         });
 
+        // Galeria de Resultados - Scroll Horizontal
+        const galleryContainer = document.getElementById('gallery-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        
+        // Navegação da galeria
+        prevBtn.addEventListener('click', function() {
+            galleryContainer.scrollBy({
+                left: -320,
+                behavior: 'smooth'
+            });
+        });
+        
+        nextBtn.addEventListener('click', function() {
+            galleryContainer.scrollBy({
+                left: 320,
+                behavior: 'smooth'
+            });
+        });
+        
         // Scroll Animation
         const observerOptions = {
             threshold: 0.1,
@@ -1525,7 +1732,7 @@
         }, observerOptions);
 
         // Observe elements for animation
-        document.querySelectorAll('.service-card, .values-card, .mission-card, .vision-card').forEach(el => {
+        document.querySelectorAll('.service-card, .values-card, .mission-card, .vision-card, .gallery-item').forEach(el => {
             el.style.opacity = 0;
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
