@@ -464,6 +464,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             position: relative;
+            cursor: pointer;
         }
 
         .gallery-item:hover {
@@ -758,6 +759,121 @@
             font-size: 30px;
         }
 
+        /* Modal de Visualização de Imagens em Tela Cheia */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 2001;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .image-modal.active {
+            display: flex;
+        }
+
+        .image-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+
+        @keyframes modalFadeIn {
+            from {opacity: 0; transform: scale(0.9);}
+            to {opacity: 1; transform: scale(1);}
+        }
+
+        .image-modal-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            object-fit: contain;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            background: rgba(0,0,0,0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .image-modal-close:hover {
+            background: rgba(0,0,0,0.8);
+            transform: rotate(90deg);
+        }
+
+        .image-modal-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+
+        .image-modal-nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .image-modal-nav-btn:hover {
+            background-color: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .image-modal-caption {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 5px;
+        }
+
+        .image-modal-counter {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            color: white;
+            font-size: 16px;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
         /* Modal de Inscrição COM SCROLL FUNCIONAL */
         .modal {
             display: none;
@@ -788,11 +904,6 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-        }
-
-        @keyframes modalFadeIn {
-            from {opacity: 0; transform: translateY(-50px) scale(0.9);}
-            to {opacity: 1; transform: translateY(0) scale(1);}
         }
 
         .modal-inner {
@@ -1109,6 +1220,19 @@
             .video-wrapper {
                 height: 200px;
             }
+
+            .image-modal-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .image-modal-close {
+                top: -30px;
+                font-size: 24px;
+                width: 35px;
+                height: 35px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1180,6 +1304,26 @@
 
             .video-wrapper {
                 height: 180px;
+            }
+
+            .image-modal-nav-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+                padding: 0;
+            }
+
+            .image-modal-close {
+                top: -25px;
+                font-size: 20px;
+                width: 30px;
+                height: 30px;
+            }
+
+            .image-modal-counter {
+                top: -35px;
+                font-size: 14px;
+                padding: 3px 10px;
             }
         }
     </style>
@@ -1352,53 +1496,67 @@
             
             <div class="results-gallery">
                 <div class="gallery-container" id="gallery-container">
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-index="0">
                         <img src="https://i.postimg.cc/x8RjJSdy/1762178441102.jpg" alt="Resultado 1 - Cliente satisfeito">
                         <div class="gallery-caption">
-                            <h4>Monografia Concluída</h4>
-                            <p>Estudante de Direito - Universidade Eduardo Mondlane</p>
+                            <h4>Sucesso Acadêmico</h4>
+                            <p></p>
                         </div>
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-index="1">
                         <img src="https://i.postimg.cc/j5ySTf0L/1762178438800.jpg" alt="Resultado 2 - Cliente satisfeito">
                         <div class="gallery-caption">
-                            <h4>Relatório de Estágio</h4>
-                            <p>Estudante de Engenharia - Instituto Superior de Transportes</p>
+                            <h4>Sucesso Acadêmico</h4>
+                            <p></p>
                         </div>
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-index="2">
                         <img src="https://i.postimg.cc/HkLnMjXm/1762178436245.jpg" alt="Resultado 3 - Cliente satisfeito">
                         <div class="gallery-caption">
-                            <h4>Dissertação de Mestrado</h4>
-                            <p>Mestrando em Gestão - Universidade Pedagógica</p>
+                            <h4>Sucesso Acadêmico</h4>
+                            <p></p>
                         </div>
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-index="3">
                         <img src="https://i.postimg.cc/JnpdG6L1/1762178443615.jpg" alt="Resultado 4 - Cliente satisfeito">
                         <div class="gallery-caption">
-                            <h4>Plano de Negócios</h4>
-                            <p>Empreendedor - Curso de Gestão de Empresas</p>
+                            <h4>Sucesso Acadêmico</h4>
+                            <p></p>
                         </div>
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-index="4">
                         <img src="https://i.postimg.cc/hvHsdN3j/1762178446612.jpg" alt="Resultado 5 - Cliente satisfeito">
                         <div class="gallery-caption">
-                            <h4>Exame de Estado</h4>
-                            <p>Estudante de Medicina - Faculdade de Medicina</p>
-                        </div>
+                            <h4>Sucesso Acadêmico</h4>
+                            <p></div>
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-index="5">
                         <img src="https://i.postimg.cc/Pq3RqVHF/1762178471485.jpg" alt="Resultado 6 - Cliente satisfeito">
                         <div class="gallery-caption">
-                            <h4>Pesquisa Científica</h4>
-                            <p>Investigador - Centro de Estudos Africanos</p>
+                            <h4>Sucesso Acadêmico</h4>
+                            <p></p>
                         </div>
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item" data-index="6">
                         <img src="https://i.postimg.cc/FzMj0rbt/b547399dc8114ca4a70b62409ff66371.jpg" alt="Resultado 7 - Cliente satisfeito">
                         <div class="gallery-caption">
-                            <h4>Projecto Concluído</h4>
-                            <p>Estudante de Economia - Universidade Católica</p>
+                            <h4>Sucesso Acadêmico</h4>
+                            <p></p>
+                        </div>
+                    </div>
+                    <!-- NOVAS IMAGENS ADICIONADAS -->
+                    <div class="gallery-item" data-index="7">
+                        <img src="https://i.postimg.cc/rsJwJBDT/IMG-20251205-WA0023.jpg" alt="Resultado 8 - Cliente satisfeito">
+                        <div class="gallery-caption">
+                            <h4>Sucesso Académico</h4>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-index="8">
+                        <img src="https://i.postimg.cc/9fRzhgnb/IMG-20251205-WA0025.jpg" alt="Resultado 9 - Cliente satisfeito">
+                        <div class="gallery-caption">
+                            <h4>Conquista Profissional</h4>
+                            <p>Mestrado concluído com excelência - UEM</p>
                         </div>
                     </div>
                 </div>
@@ -1414,6 +1572,26 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal de Visualização de Imagens em Tela Cheia -->
+    <div class="image-modal" id="image-modal">
+        <div class="image-modal-content">
+            <span class="image-modal-close" id="image-modal-close">&times;</span>
+            <div class="image-modal-counter">
+                <span id="current-image-index">1</span> / <span id="total-images">9</span>
+            </div>
+            <img class="image-modal-img" id="image-modal-img" src="" alt="">
+            <div class="image-modal-caption" id="image-modal-caption"></div>
+            <div class="image-modal-nav">
+                <button class="image-modal-nav-btn" id="image-modal-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="image-modal-nav-btn" id="image-modal-next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Nova Seção: Vídeos de Graduação -->
     <section class="graduation-videos" id="graduation">
@@ -1701,7 +1879,7 @@
         drawerOverlay.addEventListener('click', function() {
             drawer.classList.remove('active');
             drawerOverlay.classList.remove('active');
-           document.body.style.overflow = '';
+            document.body.style.overflow = '';
         });
 
         // Fechar drawer ao clicar nos links
@@ -1886,6 +2064,92 @@
             });
         });
 
+        // Modal de Visualização de Imagens em Tela Cheia
+        const imageModal = document.getElementById('image-modal');
+        const imageModalClose = document.getElementById('image-modal-close');
+        const imageModalImg = document.getElementById('image-modal-img');
+        const imageModalCaption = document.getElementById('image-modal-caption');
+        const imageModalPrev = document.getElementById('image-modal-prev');
+        const imageModalNext = document.getElementById('image-modal-next');
+        const currentImageIndex = document.getElementById('current-image-index');
+        const totalImages = document.getElementById('total-images');
+        
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        let currentIndex = 0;
+        
+        // Configurar total de imagens
+        totalImages.textContent = galleryItems.length;
+        
+        // Abrir modal ao clicar em uma imagem da galeria
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', function() {
+                currentIndex = index;
+                updateModalImage();
+                imageModal.classList.add('active');
+                document.body.classList.add('modal-open');
+            });
+        });
+        
+        // Fechar modal
+        imageModalClose.addEventListener('click', function() {
+            imageModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        });
+        
+        // Fechar modal ao clicar fora da imagem
+        imageModal.addEventListener('click', function(e) {
+            if (e.target === imageModal) {
+                imageModal.classList.remove('active');
+                document.body.classList.remove('modal-open');
+            }
+        });
+        
+        // Navegação no modal
+        imageModalPrev.addEventListener('click', function() {
+            currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+            updateModalImage();
+        });
+        
+        imageModalNext.addEventListener('click', function() {
+            currentIndex = (currentIndex + 1) % galleryItems.length;
+            updateModalImage();
+        });
+        
+        // Navegação com teclado
+        document.addEventListener('keydown', function(e) {
+            if (imageModal.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') {
+                    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                    updateModalImage();
+                } else if (e.key === 'ArrowRight') {
+                    currentIndex = (currentIndex + 1) % galleryItems.length;
+                    updateModalImage();
+                } else if (e.key === 'Escape') {
+                    imageModal.classList.remove('active');
+                    document.body.classList.remove('modal-open');
+                }
+            }
+        });
+        
+        // Função para atualizar a imagem no modal
+        function updateModalImage() {
+            const currentItem = galleryItems[currentIndex];
+            const imgSrc = currentItem.querySelector('img').src;
+            const caption = currentItem.querySelector('.gallery-caption');
+            
+            imageModalImg.src = imgSrc;
+            currentImageIndex.textContent = currentIndex + 1;
+            
+            if (caption) {
+                const captionTitle = caption.querySelector('h4').textContent;
+                const captionText = caption.querySelector('p').textContent;
+                imageModalCaption.innerHTML = `<h4>${captionTitle}</h4><p>${captionText}</p>`;
+                imageModalCaption.style.display = 'block';
+            } else {
+                imageModalCaption.style.display = 'none';
+            }
+        }
+        
         // Controlo de Vídeos
         const videoWrappers = document.querySelectorAll('.video-wrapper');
         
